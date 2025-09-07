@@ -910,7 +910,19 @@ function airwalk(input) {
       h5gg.editAll('-9.8', 'F32');
       h5gg.clearResults();
     }
-    
+}  
+function rampage(input) {
+    if (input.checked) {
+        h5gg.clearResults();
+      h5gg.searchNumber('80000', 'F32', '0x000000000', '0x200000000');
+      h5gg.editAll('2580000', 'F32');
+      h5gg.clearResults();
+    } else {
+        h5gg.clearResults();
+      h5gg.searchNumber('2580000', 'F32', '0x000000000', '0x200000000');
+      h5gg.editAll('80000', 'F32');
+      h5gg.clearResults();
+    }
 }
 function aaasss() {
             h5gg.clearResults();
@@ -976,6 +988,9 @@ Hide icon
         <input type="checkbox" onclick="airwalk(this)"/>
     </label> 𝐀𝐢𝐫 𝐖𝐚𝐥𝐤
 <h1>
+    <label class="togglebutton1">
+        <input type="checkbox" onclick="rampage(this)"/>
+    </label> 𝐑𝐚𝐦𝐩𝐚𝐠𝐞
 <p></p>
 <button onclick="scriptmenu4()">𝐋𝐨𝐧𝐠 𝐍𝐚𝐦𝐞</button>
 <br>
