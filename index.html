@@ -924,6 +924,19 @@ function rampage(input) {
       h5gg.clearResults();
     }
 }
+function dive(input) {
+    if (input.checked) {
+        h5gg.clearResults();
+      h5gg.searchNumber('180', 'F32', '0x000000000', '0x200000000');
+      h5gg.editAll('185.333', 'F32');
+      h5gg.clearResults();
+    } else {
+        h5gg.clearResults();
+      h5gg.searchNumber('185.333', 'F32', '0x000000000', '0x200000000');
+      h5gg.editAll('180', 'F32');
+      h5gg.clearResults();
+    }
+}
 function aaasss() {
             h5gg.clearResults();
             h5gg.searchNumber("8403089831969947648", "I64", "0x50000000", "0x200000000");
@@ -992,7 +1005,11 @@ ScriptVer 1.4
     <label class="togglebutton1">
         <input type="checkbox" onclick="rampage(this)"/>
     </label> 𝐑𝐚𝐦𝐩𝐚𝐠𝐞
-<p></p>
+<h1>
+    <label class="togglebutton1">
+        <input type="checkbox" onclick="dive(this)"/>
+    </label> 𝐃𝐢𝐯𝐞
+<p>
 <button onclick="scriptmenu4()">𝐋𝐨𝐧𝐠 𝐍𝐚𝐦𝐞</button>
 <br>
 <button onclick="roompass()">𝐑𝐨𝐨𝐦 𝐏𝐚𝐬𝐬</button>
