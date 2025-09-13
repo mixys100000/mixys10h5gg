@@ -876,13 +876,17 @@ function roompass(v) {
                 alert("パスワードが見つかりませんでした。");
             }
     }
-function chatlimit() {
+function limitunlock() {
             h5gg.clearResults();
-            h5gg.searchNumber("25769804032", "I32", "0x0", "0x200000000");
-            const results = h5gg.getResults(h5gg.getResultsCount());
-            h5gg.searchNearby('100', 'I32', '0x100');
-            h5gg.searchNumber("100", "I32", "0x0", "0x200000000");
-            h5gg.editAll('-1', 'I32');
+            alert("3文字入力してください");
+            h5gg.searchNumber('3', 'I32', '0x000000000', '0x200000000');
+            alert("5文字入力してください");
+            h5gg.searchNumber('5', 'I32', '0x000000000', '0x200000000');
+            alert("7文字入力してください");
+            h5gg.searchNumber('7', 'I32', '0x000000000', '0x200000000');
+            let aaaiiiuuu = prompt("最高値を入力");
+            h5gg.searchNearby(aaaiiiuuu, 'I32', '0x100');
+            h5gg.editAll('-5000000000', 'I32');
             h5gg.clearResults();
         }
 function flycar(input) {
@@ -1010,7 +1014,7 @@ ScriptVer 1.6
         <input type="checkbox" onclick="dive(this)"/>
     </label> 𝐃𝐢𝐯𝐞
 <p>
-<button onclick="scriptmenu4()">𝐋𝐨𝐧𝐠 𝐍𝐚𝐦𝐞</button><button onclick="chatlimit()">𝐂𝐡𝐚𝐭 𝐋𝐢𝐦𝐢𝐭</button>
+<button onclick="scriptmenu4()">𝐋𝐨𝐧𝐠 𝐍𝐚𝐦𝐞</button><button onclick="limitunlock()">𝐂𝐡𝐚𝐭 𝐋𝐢𝐦𝐢𝐭</button>
 <br>
 <button onclick="roompass()">𝐑𝐨𝐨𝐦 𝐏𝐚𝐬𝐬</button>
 <br>
