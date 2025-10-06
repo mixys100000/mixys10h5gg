@@ -1,116 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>H5AlertView</title>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<style type="text/css">
-* {
-    color: #fff;
-    font-size: 13px;
-    font-family: serif;
-}
-html {
-    zoom: 1.1
-}
-
-body{
-    width: 90%;
-    height: 100%;
-}
-
-#H5AlertView {
-    text-align:center;
-}
-
+<title>H5AlertView</title>
+<style>
+*{color:#fff;font-size:13px;font-family:serif;}
+html{zoom:1.1;}
+body{width:90%;height:100%;}
+#H5AlertView{text-align:center;}
 #content-view{
-    z-index:0;
-    background: rgba(0, 0, 0, 0.8);
-    position: relative;
-    top: -80px;
-    border: 1px solid #E8E8E8;
+    background:rgba(0,0,0,0.8);
+    border:1px solid #E8E8E8;
     border-radius:10px;
-    padding: 10px;
+    padding:10px;
 }
-
-.scrollbar {
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-.scrollbar::-webkit-scrollbar {
-    width: 5px; 
-    height: 5px;
-    background-color: #F5F5F5;
-}
-
-.scrollbar::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #F5F5F5;
-}
-
-.scrollbar::-webkit-scrollbar-thumb {
-    border-radius: 15px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #B8B8B8;
-}
-
-button {
-    height: 25px;
+.scrollbar{overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+button{
+    height:25px;
     background-color:#333132;
-    display: inline-block;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    border-radius: 3px;
+    border-radius:3px;
+    cursor:pointer;
+    outline:none;
 }
-
-button:active {
-     transform: translateY(2px);
+button:active{transform:translateY(2px);}
+.togglebutton1{
+    display:inline-block;position:relative;width:30px;height:15px;
+    border-radius:12.5px;background-color:#ddd;cursor:pointer;transition:.4s;
 }
-
-
-/*トグルボタン*/
-
-
-.togglebutton1 {
-    display: inline-block;
-    position: relative;
-    width: 30px;
-    height: 15px;
-    border-radius: 12.5px;
-    background-color: #dddddd;
-    cursor: pointer;
-    transition: background-color .4s;
+.togglebutton1:has(:checked){background-color:gray;}
+.togglebutton1::after{
+    position:absolute;top:0;left:0;width:15px;height:15px;border-radius:50%;
+    background-color:#fff;content:'';transition:.4s;
 }
-
-.togglebutton1:has(:checked) {
-    background-color: gray;
-}
-
-.togglebutton1::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    box-shadow: 0 0 5px rgb(0 0 0 / 20%);
-    background-color: #fff;
-    content: '';
-    transition: left .4s;
-}
-
-.togglebutton1:has(:checked)::after {
-    left: 15px;
-}
-
-.togglebutton1 input {
-    display: none;
-}
-
+.togglebutton1:has(:checked)::after{left:15px;}
+.togglebutton1 input{display:none;}
 *:not(input, checkbox, textarea) {
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -122,6 +46,19 @@ button:active {
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
 
+//ページ切り替え
+let currentPage = 1;
+function changePage1() {
+    if (currentPage === 1) {
+        document.getElementById("page1").style.display = "none";
+        document.getElementById("page2").style.display = "block";
+        currentPage = 2;
+    } else {
+        document.getElementById("page1").style.display = "block";
+        document.getElementById("page2").style.display = "none";
+        currentPage = 1;
+    }
+}
 
 $(document).ready(function(){
     
@@ -173,10 +110,10 @@ function scriptmenu3(input) {
     if (input.checked) {
         h5gg.clearResults();  
         h5gg.searchNumber('-9.8', 'F32', '0x000000000', '0x200000000');
-        h5gg.editAll('2.941', 'F32');
+        h5gg.editAll('-9999999999999999999999', 'F32');
     } else {
         h5gg.clearResults();  
-        h5gg.searchNumber('2.941', 'F32', '0x000000000', '0x200000000');
+        h5gg.searchNumber('-9999999999999999999999', 'F32', '0x000000000', '0x200000000');
         h5gg.editAll('-9.8', 'F32');
         h5gg.clearResults();
     }
@@ -185,7 +122,7 @@ function scriptmenu3(input) {
 function scriptmenu5(input) {
     if (input.checked) {
         h5gg.clearResults();
-            h5gg.searchNumber("8403089831969947648", "I64", "0x50000000", "0x200000000");
+   h5gg.searchNumber("8403089831969947648", "I64", "0x000000000", "0x200000000");
             const results = h5gg.getResults(h5gg.getResultsCount());
 
             for (const r of results) {
@@ -194,11 +131,33 @@ function scriptmenu5(input) {
             h5gg.clearResults();
     } else {
         h5gg.clearResults();
-            h5gg.searchNumber("8403089831969947648", "I64", "0x50000000", "0x200000000");
+            h5gg.searchNumber("8403089831969947648", "I64", "0x000000000", "0x200000000");
             const results = h5gg.getResults(h5gg.getResultsCount());
 
             for (const r of results) {
                 h5gg.setValue(Number(r.address) + 0x60, 14643, "F32");
+            }
+            h5gg.clearResults();
+    }
+}
+
+function scriptmenu7(input) {
+    if (input.checked) {
+        h5gg.clearResults();
+            h5gg.searchNumber("8403089831969947648", "I64", "0x50000000", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+
+            for (const r of results) {
+                h5gg.setValue(Number(r.address) + 0x60, 3200, "F32");
+            }
+            h5gg.clearResults();
+    } else {
+        h5gg.clearResults();
+            h5gg.searchNumber("8403089831969947648", "I64", "0x50000000", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+
+            for (const r of results) {
+                h5gg.setValue(Number(r.address) + 0x60, -3200, "F32");
             }
             h5gg.clearResults();
     }
@@ -233,7 +192,7 @@ let holdInterval = null;
 
 function startHold(func) {
     if (holdInterval) return;         
-    holdInterval = setInterval(func, 50);
+    holdInterval = setInterval(func, 25);
 }
 
 function stopHold() {
@@ -302,69 +261,161 @@ function initSearch() {
     baseResults = h5gg.getResults(h5gg.getResultsCount());
     h5gg.clearResults();
 }
+
+//page2
+function crownunlock() {
+
+            h5gg.clearResults();
+            h5gg.searchNumber('-4294967078', 'I64', '0x000000000', '0x200000000');
+            h5gg.editAll('-4294967079', 'I64');
+            h5gg.clearResults();
+        }
+
+function longname() {
+            h5gg.clearResults();
+            h5gg.searchNumber("4543443241174818784", "I32", "0x0", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+            h5gg.searchNearby('12', 'I32', '0x100');
+            h5gg.searchNumber("12", "I32", "0x0", "0x200000000");
+            h5gg.editAll('-1', 'I32');
+            h5gg.clearResults();
+        }
+
+function roompass() {
+            h5gg.clearResults();
+            h5gg.searchNumber("4535389738344906752", "I64", "0x0", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+            const j = [];
+            for (let i = 0; i < results.length; i++) {
+                const tmp = Number(results[i].address) + 0x4C;
+                const val = Number(h5gg.getValue(tmp, "I32"));
+                if (val >= 1 && val <= 9999) j.push(val);
+            }
+            h5gg.clearResults();
+            if (j.length) {
+                alert("パスワード:\n" + j.join("\n"));
+                toast(getScriptName(14) + ' 完了');
+            } else {
+                alert("パスワードが見つかりません。");
+            }
+        }
+
+function carmetal() {
+            h5gg.clearResults();
+            let carmetal1 = prompt("数値を入力");
+h5gg.searchNumber("4575657222559105024", "I32", "0x0", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+
+            for (const { address } of results) {
+                const base = Number(address) + 0xFC;
+                for (let offset = -8; offset <= 8; offset += 4) {
+                    const addrs = Array.from({ length: 4 }, (_, j) => base + offset + 4 * j);
+                    const vals = addrs.map(addr => Number(h5gg.getValue(addr, "F32")));
+                    if (vals.every(val => !isNaN(val) && (val === 0 || (val >= 1e-10 && val <= 30)))) {
+                        addrs.forEach(addr => h5gg.setValue(addr, carmetal1, "F32"));
+                        break;
+                    }
+                }
+            }
+            h5gg.clearResults();
+        }
+
+        function wheelmetal() {
+            h5gg.clearResults();
+            let wheelmetal1 = prompt("数値を入力");h5gg.searchNumber("50465865729", "I32", "0x0", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+
+            for (const { address } of results) {
+                const base = Number(address) - 0xA4;
+                for (let offset = -8; offset <= 8; offset += 4) {
+                    const addrs = Array.from({ length: 4 }, (_, j) => base + offset + 4 * j);
+                    const vals = addrs.map(addr => Number(h5gg.getValue(addr, "F32")));
+                    if (vals.every(val => !isNaN(val) && (val === 0 || (val >= 1e-10 && val <= 30)))) {
+                        addrs.forEach(addr => h5gg.setValue(addr, wheelmetal1, "F32"));
+                        break;
+                    }
+                }
+            }
+            h5gg.clearResults();
+        }
+
+function limitunlock() {
+      h5gg.clearResults();
+      alert("3");
+      h5gg.searchNumber('3', 'I32', '0x000000000', '0x2000000');
+      alert("5");
+      h5gg.searchNumber('5', 'I32', '0x000000000', '0x2000000');
+      alert("7");
+      h5gg.searchNumber('7', 'I32', '0x000000000', '0x200000000');
+      h5gg.searchNearby('12', 'I32', '0x100');
+      h5gg.editAll(5000000000, 'I32');
+    }
+
+function rampage(input) {
+    if (input.checked) {
+        h5gg.clearResults();
+        h5gg.searchNumber('80000', 'F32', '0x000000000', '0x200000000');
+        h5gg.editAll('92580000', 'F32');
+    } else {
+        h5gg.clearResults();  
+        h5gg.searchNumber('92580000', 'F32', '0x000000000', '0x200000000');
+        h5gg.editAll('80000', 'F32');
+        h5gg.clearResults();
+    }
+}
 </script>
 </head>
 <body>
-<div id="titleBar" style="background-color:rgba(0, 0, 0, 0.8); padding:5px; margin:0px; border-radius:10px; font-size: 10px;">
-&nbsp;𝐌𝐢𝐱𝐲𝐬 𝐒𝐂𝐑𝐈𝐏𝐓 <button onclick="initSearch()"> ON </button>
+<div id="titleBar" style="background-color:rgba(0,0,0,0.8);padding:5px;border-radius:10px;font-size:10px;">
+&nbsp;𝐌𝐢𝐱𝐲𝐬 𝐒𝐂𝐑𝐈𝐏𝐓 <button onclick="initSearch()">ON</button> <button onclick="changePage1()">|||||</button>
 </div>
+
 <div id="H5AlertView">
-<div id="title-img">
-<img style="width: 0x;height: 80px; border-radius: 50%;"/>
-</div>
 <div id="content-view">
-<div class="scrollbar" style="max-height:220px">
-    貫通
-    <label class="togglebutton1">
-        <input type="checkbox" onclick="scriptmenu1(this)"/>
-      </label>
-    <p>無重力
-    <label class="togglebutton1">
-        <input type="checkbox" onclick="scriptmenu3(this)"/>
-      </label>
-    <p>
-<button 
-  onmousedown="startHold(N1)" 
-  onmouseup="stopHold()" 
-  ontouchstart="startHold(N1)" 
-  ontouchend="stopHold()">N</button>
-<p></p>
-<button 
-  onmousedown="startHold(W1)" 
-  onmouseup="stopHold()" 
-  ontouchstart="startHold(W1)" 
-  ontouchend="stopHold()">W</button>
+<div class="scrollbar" style="max-height:220px;">
 
-<button 
-  onmousedown="startHold(S1)" 
-  onmouseup="stopHold()" 
-  ontouchstart="startHold(S1)" 
-  ontouchend="stopHold()">S</button>
 
-<button 
-  onmousedown="startHold(E1)" 
-  onmouseup="stopHold()" 
-  ontouchstart="startHold(E1)" 
-  ontouchend="stopHold()">E</button>
+<!-- 🔸ページ1 -->
+<div id="page1" style="display:block;">
+貫通
+<label class="togglebutton1"><input type="checkbox"onclick="scriptmenu1(this)"/></label>
+<p>浮遊
+<label class="togglebutton1"><input type="checkbox" onclick="scriptmenu3(this)"/></label></p>
 <p>
-<button 
-  onmousedown="startHold(U1)" 
-  onmouseup="stopHold()" 
-  ontouchstart="startHold(U1)" 
-  ontouchend="stopHold()">U</button>
-
-<button 
-  onmousedown="startHold(D1)" 
-  onmouseup="stopHold()" 
-  ontouchstart="startHold(D1)" 
-  ontouchend="stopHold()">D</button>
+<label class="togglebutton1"><input type="checkbox" onclick="scriptmenu5(this)"/></label>
+<label class="togglebutton1"><input type="checkbox" onclick="scriptmenu6(this)"/></label>
+<label class="togglebutton1"><input type="checkbox" onclick="scriptmenu7(this)"/></label>
+</p>
+<button onmousedown="startHold(N1)" onmouseup="stopHold()" ontouchstart="startHold(N1)" ontouchend="stopHold()">N</button></p>
 <p>
-<label class="togglebutton1">
-        <input type="checkbox" onclick="scriptmenu5(this)"/>
-      </label>
-<label class="togglebutton1">
-        <input type="checkbox" onclick="scriptmenu6(this)"/>
-      </label>
+<button onmousedown="startHold(W1)" onmouseup="stopHold()" ontouchstart="startHold(W1)" ontouchend="stopHold()">W</button>
+<button onmousedown="startHold(S1)" onmouseup="stopHold()" ontouchstart="startHold(S1)" ontouchend="stopHold()">S</button>
+<button onmousedown="startHold(E1)" onmouseup="stopHold()" ontouchstart="startHold(E1)" ontouchend="stopHold()">E</button>
+</p>
+<p>
+<button onmousedown="startHold(U1)" onmouseup="stopHold()" ontouchstart="startHold(U1)" ontouchend="stopHold()">U</button>
+<button onmousedown="startHold(D1)" onmouseup="stopHold()" ontouchstart="startHold(D1)" ontouchend="stopHold()">D</button>
+</p>
+</div>
+
+<!-- 🔸ページ2 -->
+<div id="page2" style="display:none;">
+<button onclick="crownunlock()">crown</button>
+<button onclick="longname()">longname</button>
+<p>
+<button onclick="carmetal()">body</button>
+<button onclick="wheelmetal()">wheel</button>
+<p>
+<button onclick="roompass()">pass</button>
+<button onclick="limitunlock()">limit</button>
+<p>
+暴
+<label class="togglebutton1"><input type="checkbox"onclick="rampage(this)"/></label>
+<p>
+</div>
+
+</div>
+</div>
 </div>
 </body>
 </html>
