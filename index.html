@@ -348,7 +348,7 @@ function limitunlock() {
       alert("7");
       h5gg.searchNumber('7', 'I32', '0x000000000', '0x200000000');
       h5gg.searchNearby('12', 'I32', '0x100');
-      h5gg.editAll(5000000000, 'I32');
+      h5gg.editAll('5000000000', 'I32');
     }
 
 function rampage(input) {
@@ -364,6 +364,16 @@ function rampage(input) {
     }
 }
 
+function city1tp() {
+            h5gg.clearResults();
+            h5gg.searchNumber("8403089831969947648", "I64", "0x50000000", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+
+            for (const r of results) {
+                h5gg.setValue(Number(r.address) + 0x68, 20000, "F32");
+            }
+            h5gg.clearResults();
+        }
 </script>
 </head>
 <body>
@@ -410,7 +420,8 @@ function rampage(input) {
 <button onclick="roompass()">pass</button>
 <button onclick="limitunlock()">limit</button>
 <p>
-暴
+<button onclick="city1tp()">強制シティ1</button>
+<p>
 <label class="togglebutton1"><input type="checkbox"onclick="rampage(this)"/></label>
 <p>
 </div>
