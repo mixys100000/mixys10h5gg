@@ -1,1 +1,977 @@
-まんこwww
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta charset="utf-8">
+<title>Mixys Script</title>
+<style>
+html{zoom:0.9;}
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: none;
+  color: #fff;
+  margin: 0;
+  padding: 10px;
+  font-family:serif;
+}
+.container {
+  border-radius: 7px;
+  background:rgba(0,0,0,0.8);
+  padding: 12px;
+  border:1px solid #E8E8E8;
+}
+h2 {
+  text-align: center;
+  margin: 5px 0 10px;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+.tab {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+.tab button {
+  flex: 1 1 22%;
+  padding: 6px;
+  background: #222;
+  border:1px solid #E8E8E8;
+  border-radius: 8px;
+  color: #bbb;
+  font-size: 12px;
+  margin: 2px;
+  font-family:serif;
+}
+.tab button.active {
+  background: #5b5b5b;
+  color: white;
+}
+button:active{transform:translateY(2px);}
+button.action {
+  display: inline-block;
+  width: 70px;
+  height: 30px;
+  margin: 4px;
+  border-radius: 4px;
+  background: white;
+  border: black 1px solid;
+  color: black;
+  font-size: 13px;
+  font-family:serif;
+}
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  margin-left: 6px;
+}
+.toggle input { display:none; }
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #555;
+  border-radius: 34px;
+  transition: .3s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px; width: 16px;
+  left: 2px; bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: .3s;
+}
+input:checked + .slider {
+  background-color: #4bd865;
+}
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+.section {
+  margin-top: 10px;
+  text-align: center;
+}
+*:not(input, checkbox, textarea) {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+
+#toastContainer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  z-index: 9999;
+}
+
+.toast {
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 7px;
+  font-size: 11px;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(255,255,255,0.3);
+  min-width: 0px;
+  text-align: right;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.toggle-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #2a2a2a; /* グレー背景 */
+  padding: 4px 20px;
+  margin: 6px 0;
+  border-radius: 5px;
+  border: 1px solid #444;
+  font-size: 13px;
+}
+
+/* トグルスイッチ位置調整 */
+.toggle {
+  margin-left: 10px;
+}
+
+
+
+
+
+.engine-box {
+margin-top: 10px;
+padding: 8px 12px;
+background:#2a2a2a;
+border:1px solid #444;
+border-radius:8px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:6px;
+}
+
+
+.engine-select {
+width:140px;
+background:#111;
+border:1px solid #777;
+color:#fff;
+padding:4px;
+border-radius:5px;
+font-size:13px;
+font-family:serif;
+}
+</style>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h7>𝐌𝐢𝐱𝐲𝐬 𝐒𝐜𝐫𝐢𝐩𝐭</h7>
+<div id="toastContainer"></div>
+
+
+  <div class="tab">
+    <button id="tab1" class="active" onclick="showPage(1)">Ctrl</button>
+    <button id="tab2" onclick="showPage(2)">WARP</button>
+    <button id="tab3" onclick="showPage(3)">Car</button>
+    <button id="tab4" onclick="showPage(4)">Troll</button>
+    <button id="tab5" onclick="showPage(5)">Fun</button>
+    <button id="tab6" onclick="showPage(6)">Unlock</button>
+    <button id="tab7" onclick="showPage(7)">Misc</button>
+    <button id="tab8" onclick="showPage(8)">Setting</button>
+  </div>
+<div id="page1">
+  <div class="section">
+    <button class="action"
+      onmousedown="startHold(N1)" onmouseup="stopHold()"
+      ontouchstart="startHold(N1)" ontouchend="stopHold()">
+      N
+    </button><br>
+    <button class="action"
+      onmousedown="startHold(W1)" onmouseup="stopHold()"
+      ontouchstart="startHold(W1)" ontouchend="stopHold()">
+      Ｗ
+    </button>
+<button class="action"
+      onmousedown="startHold(S1)" onmouseup="stopHold()"
+      ontouchstart="startHold(S1)" ontouchend="stopHold()">
+      S
+    </button>
+    <button class="action"
+      onmousedown="startHold(E1)" onmouseup="stopHold()"
+      ontouchstart="startHold(E1)" ontouchend="stopHold()">
+      E
+    </button><br>
+    <button class="action"
+      onmousedown="startHold(U1)" onmouseup="stopHold()"
+      ontouchstart="startHold(U1)" ontouchend="stopHold()">
+      U
+    </button>
+    <button class="action"
+      onmousedown="startHold(D1)" onmouseup="stopHold()"
+      ontouchstart="startHold(D1)" ontouchend="stopHold()">
+      D
+    </button>
+  </div>
+</div>
+
+
+  <div id="page2" style="display:none;">
+    <div class="section">
+      <button class="action" onclick="initSearch()">Start</button><br>
+        <button class="action" onclick="savePosition(0)">City1Tire</button>
+        <button class="action" onclick="teleportToSlot(0)">WARP</button><br>
+        <button class="action" onclick="savePosition(1)">SellCar</button>
+        <button class="action" onclick="teleportToSlot(1)">WARP</button><br>
+        <button class="action" onclick="savePosition(2)">Save</button>
+        <button class="action" onclick="teleportToSlot(2)">WARP</button><br>
+        <button class="action" onclick="savePosition(2)">Save</button>
+        <button class="action" onclick="teleportToSlot(2)">WARP</button><br>
+    </div>
+</div>
+
+
+<div id="page3" style="display:none;">
+  <div class="section">
+    <button class="action" onclick="wheelmetal()">WMetal</button>
+    <button class="action" onclick="carmetal()">BMetal</button><br>
+    <button class="action" onclick="wing()">Wing</button>
+    <button class="action" onclick="parts()">Parts</button>
+    <br><div class="engine-box">
+      <select id="engine" class="engine-select">
+        <option value="L4_20">L4 2.0</option>
+        <option value="L4_25">L4 2.5</option>
+        <option value="V6_30">V6 3.0</option>
+        <option value="V6_35">V6 3.5</option>
+        <option value="V8_40">V8 4.0</option>
+        <option value="V8_45">V8 4.5</option>
+        <option value="V10_50">V10 5.0</option>
+        <option value="V10_60">V10 6.0</option>
+        <option value="V12_60">V12 6.0</option>
+        <option value="W16_80">W16 8.0</option>
+      </select>
+      <button class="action" onclick="editValues">Edit</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="page4" style="display:none;">
+    <div class="section">
+        <div class="toggle-box"><span>No Clip</span><label class="toggle"><input type="checkbox" onclick="Noclip(this)"><span class="slider"></span></label></div>
+        <div class="toggle-box"><span>Tracking</span><label class="toggle"><input type="checkbox" onclick="Tracking(this)"><span class="slider"></span></label></div>
+        <div class="toggle-box"><span>Rampage</span><label class="toggle"><input type="checkbox" onclick="Rampage(this)"><span class="slider"></span></label></div>
+        <div class="toggle-box"><span>TP</span>
+          <span>     City2</span>
+          <label class="toggle"><input type="checkbox" onclick="City2(this)"><span class="slider"></span></label>
+          <span>     Race</span>
+          <label class="toggle"><input type="checkbox" onclick="Race(this)"><span class="slider"></span></label>
+        </div>
+    </div>
+</div>
+
+
+<div id="page5" style="display:none;">
+    <div class="section">
+    <button class="action" onclick="applyHeight(-9.8, 'Gravity set to -9.8')">-9.8</button>
+    <button class="action" onclick="applyHeight(0.00021, 'Gravity set to 0')">0</button>
+    <button class="action" onclick="applyHeight(5.00021, 'Gravity set to 5')">5</button><br>
+    <button class="action" onclick="applyHeight(-9999999999999999999999, 'Fixed')">fixed</button>
+    </div>
+</div>
+  
+
+<div id="page6" style="display:none;">
+    <div class="section">
+        <button class="action" onclick="crownunlock()">Crown</button>
+        <button class="action" onclick="longname()">Name</button><br>
+        <button class="action" onclick="Chatunlock()">Chat</button>
+        <button class="action" onclick="Carcellunlock()">CarCell</button>
+    </div>
+</div>
+
+
+<div id="page7" style="display:none;">
+    <div class="section">
+    <button class="action" onclick="MaxMoney()">Money</button>
+    <button class="action" onclick="roompass()">Pass</button>
+    </div>
+</div>
+
+
+<div id="page8" style="display:none;">
+    <div class="section">
+      <div class="toggle-box"><span>Hide h5gg</span><label class="toggle"><input type="checkbox" onclick="hide(this)"><span class="slider"></span></label></div>
+      
+</div>
+
+</div>
+
+<script>
+
+
+
+
+
+function showToast(message, duration = 2500) {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerText = message;
+  document.getElementById('toastContainer').appendChild(toast);
+
+  setTimeout(() => { toast.classList.add('show'); }, 10);
+
+  setTimeout(() => { toast.classList.remove('show'); }, duration - 400);
+
+  setTimeout(() => { toast.remove(); }, duration);
+}
+
+
+function Test1(input) {
+    if (input.checked) {
+        showToast("CopyCar ");
+    } else {
+        showToast("Copy Car Disabled");
+    }
+}
+
+// =====================
+// ページ切り替え制御（8ページ対応）
+// =====================
+let currentPage = 1;
+function showPage(page) {
+  for (let i = 1; i <= 8; i++) {
+    document.getElementById("page"+i).style.display = (i === page) ? "block" : "none";
+    document.getElementById("tab"+i).classList.toggle("active", i === page);
+  }
+  currentPage = page;
+}
+function changePage1() {
+  currentPage = (currentPage % 8) + 1;
+  showPage(currentPage);
+}
+
+
+
+$(document).ready(function(){
+    
+    $("div.menubox").click(function(){
+        $("div.menubox").removeClass("current");
+        $("div.menuview").removeClass("current");
+        $(this).addClass("current");
+        
+        var menuid = $(this).attr("menu");
+        $("div#"+menuid).addClass("current");
+    });
+    
+    
+    document.body.onselectstart = document.body.ondrag =function(){
+        return false;
+    }
+    
+    $("input").blur(function(){
+        window.scroll(0,0);
+    });
+    
+    
+    document.body.addEventListener('touchstart', function () {});
+
+    if(typeof h5gg!='undefined') {
+        
+        setWindowDrag(0, 0, 400, 80);
+        
+        setWindowRect(60,60,380,350);
+    }
+});
+
+
+//テスト
+let w1AutoInterval = null;
+let w1AutoValue = -10;
+
+function toggleW1Auto(input) {
+    if (input.checked) {
+        if (!baseResults.length) {
+            showToast("先にinitSearchを実行してください。");
+            input.checked = false;
+            return;
+        }
+
+        w1AutoInterval = setInterval(() => {
+            w1AutoValue = (w1AutoValue === -10) ? 10 : -10;
+            for (const r of baseResults) {
+                h5gg.setValue(Number(r.address) + 0x60, w1AutoValue, "F32");
+            }
+        }, 800);
+    } else {
+        clearInterval(w1AutoInterval);
+        w1AutoInterval = null;
+    }
+}
+
+
+
+function City2(input) {
+    if (input.checked) {
+        h5gg.clearResults();
+   h5gg.searchNumber("8403089831969947648", "I64", "0x000000000", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+
+            for (const r of results) {
+                h5gg.setValue(Number(r.address) + 0x60, -14643, "F32");
+            }
+            h5gg.clearResults();
+    } else {
+        h5gg.clearResults();
+            h5gg.searchNumber("8403089831969947648", "I64", "0x000000000", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+
+            for (const r of results) {
+                h5gg.setValue(Number(r.address) + 0x60, 14643, "F32");
+            }
+            h5gg.clearResults();
+    }
+}
+
+function Race(input) {
+    if (input.checked) {
+        h5gg.clearResults();
+            h5gg.searchNumber("8403089831969947648", "I64", "0x50000000", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+
+            for (const r of results) {
+                h5gg.setValue(Number(r.address) + 0x68, 4800, "F32");
+            }
+            h5gg.clearResults();
+    } else {
+        h5gg.clearResults();
+            h5gg.searchNumber("8403089831969947648", "I64", "0x50000000", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+
+            for (const r of results) {
+                h5gg.setValue(Number(r.address) + 0x68, -4800, "F32");
+            }
+            h5gg.clearResults();
+    }
+}
+
+// =====================
+// 任意座標へテレポート
+// =====================
+function teleportToInput() {
+    if (!baseResults.length) {
+        showToast("initSearchを先に実行してください");
+        return;
+    }
+
+    const x = parseFloat(document.getElementById("tpX").value);
+    const y = parseFloat(document.getElementById("tpY").value);
+    const z = parseFloat(document.getElementById("tpZ").value);
+
+    if (isNaN(x) || isNaN(y) || isNaN(z)) {
+        showToast("X, Y, Z をすべて入力してください。");
+        return;
+    }
+
+    for (const r of baseResults) {
+        h5gg.setValue(Number(r.address) + 0x60, x, "F32");
+        h5gg.setValue(Number(r.address) + 0x64, y, "F32");
+        h5gg.setValue(Number(r.address) + 0x68, z, "F32");
+    }
+
+    console.log(`Moved to X:${x}, Y:${y}, Z:${z}`);
+    showToast(`移動完了:\nX=${x}\nY=${y}\nZ=${z}`);
+}
+function getCurrentPosition() {
+    if (!baseResults.length) {
+        showToast("initSearchを先に実行してください");
+        return;
+    }
+
+    const base = baseResults[0].address;
+    document.getElementById("tpX").value = h5gg.getValue(Number(base) + 0x60, "F32");
+    document.getElementById("tpY").value = h5gg.getValue(Number(base) + 0x64, "F32");
+    document.getElementById("tpZ").value = h5gg.getValue(Number(base) + 0x68, "F32");
+}
+
+
+
+
+
+
+
+
+function Noclip(input) {
+    if (input.checked) {
+        h5gg.clearResults();
+        h5gg.searchNumber('-10', 'F32', '0x000000000', '0x200000000');
+        h5gg.searchNearby('49', 'F32', '0x100');
+        h5gg.searchNumber('-10', 'F32', '0x000000000', '0x200000000');
+        h5gg.editAll('99999.99', 'F32');
+        showToast("Noclip ON");
+
+    } else {
+        h5gg.clearResults();  
+        h5gg.searchNumber('99999.99', 'F32', '0x000000000', '0x200000000');
+        h5gg.editAll('-10', 'F32');
+        h5gg.clearResults();
+        showToast("Noclip OFF");
+    }
+}
+    
+
+let found = null;
+
+async function applyHeight(value) {
+  if (!found) {
+    showToast("Searching...");
+    found = await searchHeights();
+    showToast("Found");
+  }
+
+  if (!found.length) return;
+
+  for (let i of found) h5gg.setValue(i.address, value, "F32");
+}
+
+async function searchHeights() {
+  const vals = [-9.8, 0.00021, 5.00021, -9999999999999999999999];
+  let res = [];
+  for (let v of vals) {
+    h5gg.clearResults();
+    h5gg.searchNumber(v, "F32", "0x000000000", "0x200000000");
+    res.push(...(h5gg.getResults(1000, 0) || []));
+  }
+  h5gg.clearResults();
+  return res;
+}
+
+function Chatunlock() {
+            h5gg.clearResults();
+            h5gg.searchNumber("3", "I32", "0x000000000", "0x200000000");
+            alert("5");
+            h5gg.searchNumber("5", "I32", "0x000000000", "0x200000000");
+            alert("7");
+            h5gg.searchNumber("7", "I32", "0x000000000", "0x200000000");
+            alert("9");
+            h5gg.searchNumber("9", "I32", "0x000000000", "0x200000000");
+            h5gg.searchNearby('100', 'I32', '0x100');
+            h5gg.editAll('-1', 'I32');
+            h5gg.clearResults();
+            showToast("success");
+        }
+
+function Carcellunlock() {
+            h5gg.clearResults();
+            h5gg.searchNumber("3", "I32", "0x000000000", "0x200000000");
+            alert("5");
+            h5gg.searchNumber("5", "I32", "0x000000000", "0x200000000");
+            alert("7");
+            h5gg.searchNumber("7", "I32", "0x000000000", "0x200000000");
+            alert("9");
+            h5gg.searchNumber("9", "I32", "0x000000000", "0x200000000");
+            h5gg.searchNearby('12', 'I32', '0x100');
+            h5gg.editAll('-1', 'I32');
+            h5gg.clearResults();
+            showToast("success");
+        }
+
+function wing() {
+            h5gg.clearResults();
+            h5gg.searchNumber("13", "I32", "0x000000000", "0x200000000");
+            h5gg.searchNearby('133', 'I32', '0x100');
+            h5gg.searchNearby('132', 'I32', '0x100');
+            h5gg.searchNearby('59', 'I32', '0x100');
+            h5gg.searchNearby('57', 'I32', '0x100');
+            h5gg.searchNearby('13', 'I32', '0x100');
+            let wingvalue = prompt("Car Value");
+            h5gg.editAll(wingvalue, 'I32');
+            h5gg.clearResults();
+            showToast("success");
+}
+
+function parts() {
+            h5gg.clearResults();
+            alert("1");
+            h5gg.searchNumber("1", "I64", "0x000000000", "0x200000000");
+            alert("2");
+            h5gg.searchNumber("2", "I64", "0x000000000", "0x200000000");
+            alert("3");
+            h5gg.searchNumber("3", "I64", "0x000000000", "0x200000000");
+            alert("4");
+            h5gg.searchNumber("4", "I64", "0x000000000", "0x200000000");
+            alert("5");
+            h5gg.searchNumber("5", "I64", "0x000000000", "0x200000000");
+            alert("4");
+            h5gg.searchNumber("4", "I64", "0x000000000", "0x200000000");
+            alert("Aero");
+            let partsvalue = prompt("Value");
+            h5gg.editAll(partsvalue, "I64");
+            h5gg.clearResults();
+            showToast("success");
+}
+
+function MaxMoney() {
+            alert("Go to Level 3");
+            h5gg.clearResults();
+            h5gg.searchNumber("40","F32","0x000000000","0x200000000");
+            h5gg.editAll("50000000","F32");
+            h5gg.clearResults();
+            showToast("success");
+}
+
+function Tracking(input) {
+    if (input.checked) {
+        h5gg.clearResults();
+        h5gg.searchNumber('0.39', 'F32', '0x000000000', '0x200000000');
+        h5gg.editAll('-999.112233', 'F32');
+        showToast("Tracking ON");
+    } else {
+        h5gg.clearResults();  
+        h5gg.searchNumber('-999.112233', 'F32', '0x000000000', '0x200000000');
+        h5gg.editAll('0.39', 'F32');
+        h5gg.clearResults();
+        showToast("Trracking OFF");
+    }  
+}
+
+
+// -----------------------------------------------------
+// 全エンジンデータ
+// -----------------------------------------------------
+const engineData = {
+  "L4_20": { hp:150, torque:220, maxhp:5900, maxtorque:4100 },
+  "L4_25": { hp:190, torque:300, maxhp:190,  maxtorque:4100 },
+  "V6_30": { hp:240, torque:310, maxhp:6800, maxtorque:4500 },
+  "V6_35": { hp:280, torque:350, maxhp:6300, maxtorque:4700 },
+  "V8_40": { hp:360, torque:500, maxhp:6300, maxtorque:3400 },
+  "V8_45": { hp:415, torque:430, maxhp:7000, maxtorque:4000 },
+  "V10_50":{ hp:500, torque:620, maxhp:7000, maxtorque:5600 },
+  "V10_60":{ hp:580, torque:680, maxhp:7000, maxtorque:5000 },
+  "V12_60":{ hp:612, torque:1000, maxhp:7000, maxtorque:3500 },
+  "W16_80":{ hp:1120, torque:1250, maxhp:7000, maxtorque:3500 }
+};
+
+// -----------------------------------------------------
+// メイン処理
+// -----------------------------------------------------
+function editValues() {
+  const key = document.getElementById("engine").value;
+  if (!key) return showtoast("Select Engine")
+
+  const d = engineData[key];
+
+  let newhp        = prompt("New HP", d.hp);
+  let newtorque    = prompt("New Torque", d.torque);
+  let newmaxhp     = prompt("New MaxHP", d.maxhp);
+  let newmaxtorque = prompt("New MaxTorque", d.maxtorque);
+
+  if ([newhp,newtorque,newmaxhp,newmaxtorque].includes(null))
+    return showToast("Cancell")
+
+  writeF32(d.hp,        Number(newhp));
+  writeF32(d.torque,    Number(newtorque));
+  writeF32(d.maxhp,     Number(newmaxhp));
+  writeF32(d.maxtorque, Number(newmaxtorque));
+
+  showToast("success");
+}
+
+
+function writeF32(oldValue, newValue) {
+  h5gg.clearResults();
+
+
+  h5gg.searchNumber(
+    String(oldValue),
+    "F32",
+    "0x00000000",      
+    "0x200000000"       
+  );
+
+  const results = h5gg.getResults(h5gg.getResultsCount());
+  for (const r of results) {
+    h5gg.setValue(r.address, newValue, "F32");
+  }
+}
+
+
+//XYZ
+
+let holdInterval = null;
+
+function startHold(func) {
+    if (holdInterval) return;         
+    holdInterval = setInterval(func, 25);
+}
+
+function stopHold() {
+    clearInterval(holdInterval);
+    holdInterval = null;
+}
+
+let N1value = 0;
+let W1value = 0;
+let U1value = 4;
+
+let baseResults = [];
+
+function initSearch() {
+    h5gg.clearResults();
+    h5gg.searchNumber("8403089831969947648", "I64", "0x50000000", "0x200000000");
+    baseResults = h5gg.getResults(h5gg.getResultsCount());
+    h5gg.clearResults();
+    showToast("success");
+    
+}
+
+function N1() {
+    N1value += 1;
+    for (const r of baseResults) {
+        h5gg.setValue(Number(r.address) + 0x68, N1value, "F32");
+    }
+}
+
+function S1() {
+    N1value -= 1;
+    for (const r of baseResults) {
+        h5gg.setValue(Number(r.address) + 0x68, N1value, "F32");
+    }
+}
+
+function E1() {
+    W1value += 1;
+    for (const r of baseResults) {
+        h5gg.setValue(Number(r.address) + 0x60, W1value, "F32");
+    }
+}
+
+function W1() {
+    W1value -= 1;
+    for (const r of baseResults) {
+        h5gg.setValue(Number(r.address) + 0x60, W1value, "F32");
+    }
+}
+
+function U1() {
+    U1value += 1;
+    for (const r of baseResults) {
+        h5gg.setValue(Number(r.address) + 0x64, U1value, "F32");
+    }
+}
+
+function D1() {
+    U1value -= 1;
+    for (const r of baseResults) {
+        h5gg.setValue(Number(r.address) + 0x64, U1value, "F32");
+    }
+}
+
+
+
+//page2
+function crownunlock() {
+            h5gg.clearResults();
+            h5gg.searchNumber('-4294967078', 'I64', '0x000000000', '0x200000000');
+            h5gg.editAll('-4294967079', 'I64');
+            h5gg.clearResults();
+            showToast("success");
+        }
+
+function longname() {
+            h5gg.clearResults();
+            h5gg.searchNumber("4543443241174818784", "I32", "0x0", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+            h5gg.searchNearby('12', 'I32', '0x100');
+            h5gg.searchNumber("12", "I32", "0x0", "0x200000000");
+            h5gg.editAll('-1', 'I32');
+            h5gg.clearResults();
+            showToast("success");
+        }
+
+function roompass() {
+            h5gg.clearResults();
+            h5gg.searchNumber("4535389738344906752", "I64", "0x0", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+            const j = [];
+            for (let i = 0; i < results.length; i++) {
+                const tmp = Number(results[i].address) + 0x4C;
+                const val = Number(h5gg.getValue(tmp, "I32"));
+                if (val >= 1 && val <= 9999) j.push(val);
+            }
+            h5gg.clearResults();
+            if (j.length) {
+                showToast("Password:\n" + j.join("\n"));
+            } else {
+                showToast("No Password");
+            }
+        }
+
+function carmetal() {
+            h5gg.clearResults();
+            let carmetal1 = prompt("数値を入力");
+h5gg.searchNumber("4575657222559105024", "I32", "0x0", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+
+            for (const { address } of results) {
+                const base = Number(address) + 0xFC;
+                for (let offset = -8; offset <= 8; offset += 4) {
+                    const addrs = Array.from({ length: 4 }, (_, j) => base + offset + 4 * j);
+                    const vals = addrs.map(addr => Number(h5gg.getValue(addr, "F32")));
+                    if (vals.every(val => !isNaN(val) && (val === 0 || (val >= 1e-10 && val <= 30)))) {
+                        addrs.forEach(addr => h5gg.setValue(addr, carmetal1, "F32"));
+                        break;
+                    }
+                }
+            }
+            h5gg.clearResults();
+            showToast("success");
+        }
+
+function wheelmetal() {
+            h5gg.clearResults();
+            let wheelmetal1 = prompt("数値を入力");h5gg.searchNumber("50465865729", "I32", "0x0", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+
+            for (const { address } of results) {
+                const base = Number(address) - 0xA4;
+                for (let offset = -8; offset <= 8; offset += 4) {
+                    const addrs = Array.from({ length: 4 }, (_, j) => base + offset + 4 * j);
+                    const vals = addrs.map(addr => Number(h5gg.getValue(addr, "F32")));
+                    if (vals.every(val => !isNaN(val) && (val === 0 || (val >= 1e-10 && val <= 30)))) {
+                        addrs.forEach(addr => h5gg.setValue(addr, wheelmetal1, "F32"));
+                        break;
+                    }
+                }
+            }
+            h5gg.clearResults();
+            showToast("success");
+        }
+
+
+function Rampage(input) {
+    if (input.checked) {
+        h5gg.clearResults();
+        h5gg.searchNumber('80000', 'F32', '0x000000000', '0x200000000');
+        h5gg.editAll('680000', 'F32');
+        showToast("Rampage ON");
+    } else {
+        h5gg.clearResults();  
+        h5gg.searchNumber('680000', 'F32', '0x000000000', '0x200000000');
+        h5gg.editAll('80000', 'F32');
+        h5gg.clearResults();
+        showToast("Rampage OFF");
+    }
+}
+
+function respawn() {
+            h5gg.clearResults();
+            h5gg.searchNumber("8403089831969947648", "I64", "0x50000000", "0x200000000");
+            const results = h5gg.getResults(h5gg.getResultsCount());
+
+            for (const r of results) {
+                h5gg.setValue(Number(r.address) + 0x64, -999, "F32");
+            }
+            h5gg.clearResults();
+            showToast("success");
+}
+
+
+
+let w1ToggleInterval = null;
+let w1Current = 30;
+
+function toggleW1Switch(input) {
+    if (input.checked) {
+        if (!baseResults.length) {
+            input.checked = false;
+            return;
+        }
+
+        w1ToggleInterval = setInterval(() => {
+            w1Current = (w1Current === 30) ? -30 : 30;
+            for (const r of baseResults) {
+                h5gg.setValue(Number(r.address) + 0x60, w1Current, "F32");
+            }
+        }, 500);
+        showToast("slide ON");
+    } else {
+        clearInterval(w1ToggleInterval);
+        w1ToggleInterval = null;
+        showToast("slide OFF");
+    }
+}
+
+
+
+// --- 座標保存＆テレポート（6スロット固定名） ---
+
+let savedSlots = Array(6).fill(null).map(() => ({
+    x: 0, y: 0, z: 0, used: false
+}));
+
+function savePosition(slot) {
+    if (!baseResults.length) {
+        showToast("initSearchを先に実行してください");
+        return;
+    }
+
+    const base = baseResults[0].address;
+    savedSlots[slot].x = h5gg.getValue(Number(base) + 0x60, "F32");
+    savedSlots[slot].y = h5gg.getValue(Number(base) + 0x64, "F32");
+    savedSlots[slot].z = h5gg.getValue(Number(base) + 0x68, "F32");
+    savedSlots[slot].used = true;
+showToast(`スロット${slot + 1}に保存完了\nX:${savedSlots[slot].x}\nY:${savedSlots[slot].y}\nZ:${savedSlots[slot].z}`);
+}
+
+function teleportToSlot(slot) {
+    if (!baseResults.length) {
+        showToast("initSearchを先に実行してください");
+        return;
+    }
+
+    if (!savedSlots[slot].used) {
+        showToast(`スロット${slot + 1}には座標が保存されていません`);
+        return;
+    }
+
+    for (const r of baseResults) {
+        h5gg.setValue(Number(r.address) + 0x60, savedSlots[slot].x, "F32");
+        h5gg.setValue(Number(r.address) + 0x64, savedSlots[slot].y, "F32");
+        h5gg.setValue(Number(r.address) + 0x68, savedSlots[slot].z, "F32");
+    }
+
+}
+
+//setting
+function hide(input) {
+    if (input.checked) {
+        setButtonImage('https://discord.com');
+        setWindowDrag(0, 0, 300, 50);  
+        showToast("h5gg Hidden");
+    } else {
+        setButtonImage('https://img.anfensi.com/upload/2025-3/202537103734718.png');
+        setWindowDrag(0, 0, 300, 50);  
+        showToast("h5gg Shown");
+    }
+}
+</script>
+</body>
+</html>
